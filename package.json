@@ -1,0 +1,24 @@
+{
+  "name": "fiber-ablility",
+  "version": "1.0.0",
+  "description": "A discord bot called \"Fiber Ability\"",
+  "main": "src/bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MWolf88/Fiber-Ability.git"
+  },
+  "keywords": [
+    "bot",
+    "discord",
+    "full"
+  ],
+  "author": "SplitWolf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MWolf88/Fiber-Ability/issues"
+  },
+  "homepage": "https://github.com/MWolf88/Fiber-Ability#readme"
+}
