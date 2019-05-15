@@ -2,13 +2,13 @@
   "name": "fiber-ablility",
   "version": "1.0.0",
   "description": "A discord bot called \"Fiber Ability\"",
-  "main": "src/bot.js",
+  "main": "out/bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MWolf88/Fiber-Ability.git"
+    "url": "git+https://github.com/SplitWolf/Fiber-Ability.git"
   },
   "keywords": [
     "bot",
@@ -18,7 +18,17 @@
   "author": "SplitWolf",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/MWolf88/Fiber-Ability/issues"
+    "url": "https://github.com/SplitWolf/Fiber-Ability/issues"
   },
-  "homepage": "https://github.com/MWolf88/Fiber-Ability#readme"
+  "homepage": "https://github.com/SplitWolf/Fiber-Ability#readme",
+  "dependencies": {
+    "discord.js": "11.5.0",
+    "node-opus": "0.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "12.0.2",
+    "ts-loader": "6.0.0",
+    "typescript": "3.4.5",
+    "webpack": "4.31.0"
+  }
 }
