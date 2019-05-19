@@ -2,9 +2,10 @@
   "name": "fiber-ablility",
   "version": "1.0.0",
   "description": "A discord bot called \"Fiber Ability\"",
-  "main": "out/bot.js",
+  "main": "dist/bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -26,9 +27,9 @@
     "node-opus": "0.3.1"
   },
   "devDependencies": {
+    "dotenv": "8.0.0",
     "@types/node": "12.0.2",
     "ts-loader": "6.0.0",
-    "typescript": "3.4.5",
-    "webpack": "4.31.0"
+    "typescript": "3.4.5"
   }
 }
