@@ -6,7 +6,7 @@ module.exports = class ping extends Command {
         super({name: "ping", description: "", usage: "", group: "member", aliases: []})
     }
     
-    async run(bot: Client, message: Message, args: string[], prefix: string) {
+    async run(bot: Client, message: Message, args: string[], prefix: string): Promise<void> {
         
         message.channel.send(`Pong! \`${Math.abs(Date.now() - new Date(message.createdAt).getTime())}ms\``);
     }
