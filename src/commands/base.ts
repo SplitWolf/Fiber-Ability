@@ -34,9 +34,9 @@ export abstract class Command {
    * @param message Message to check permissions for.
    */
   hasPermission(message: Message): boolean {
-    const hasPerms = !message.guild
+    const hasPerms = message.guild
       .member(message.author)
-      .hasPermission(this.userPermissions);
+      .permissions.has(this.userPermissions);
     if (hasPerms) {
       return true;
     }
@@ -56,5 +56,10 @@ export abstract class Command {
    * @param prefix The Bot's current prefix
    */
 
-  abstract async run(bot: Client, message: Message, args: string[], prefix: string) : Promise<void>;
+  abstract async run(
+    bot: Client,
+    message: Message,
+    args: string[],
+    prefix: string
+  ): Promise<void>;
 }
