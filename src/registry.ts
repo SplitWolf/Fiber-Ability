@@ -25,9 +25,7 @@ export class Registry {
         //Register Command
         const cmdImport = require(filePath.toString());
         const cmd = new cmdImport();
-        //Check to see if command is not already present as another command/alias
         if (!this.commands.has(commandName) || !this.aliases.has(commandName)) {
-          //Set command
           this.commands.set(commandName, cmd);
         } else {
           console.error(
@@ -37,9 +35,7 @@ export class Registry {
         //Register aliases
         let aliases: string[] = cmd.getAliases();
         aliases.forEach(alias => {
-          //Check to see if alias is not already present as another command/alias
           if (!this.commands.has(alias) || !this.aliases.has(alias)) {
-            //Set alias
             this.aliases.set(alias, commandName);
           } else {
             console.error(
@@ -63,12 +59,9 @@ export class Registry {
 
   getCommand(cmdName: string, callback: (command: Command) => void) {
     if (this.commands.has(cmdName)) {
-      //Return instance of command
       callback(this.commands.get(cmdName));
     } else if (this.aliases.has(cmdName)) {
-      //Get Command Name from alias
       let cmd = this.aliases.get(cmdName);
-      //Return instance of command
       callback(this.commands.get(cmd));
     } else {
       //Return null as no command exists
