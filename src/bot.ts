@@ -8,7 +8,8 @@ let registry: Registry = new Registry();
 //Create function to register all commands
 function registerCommands() {
   registry.setCommand("ping", __dirname + "/commands/ping.ts");
-  registry.setCommand("clean", __dirname + "/commands/clean.ts")
+  registry.setCommand("clean", __dirname + "/commands/clean.ts");
+  registry.setCommand("kick", __dirname + "/commands/kick.ts");
 }
 
 bot.on("ready", () => {
