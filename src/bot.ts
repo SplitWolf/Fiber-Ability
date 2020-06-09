@@ -14,10 +14,10 @@ function registerCommands() {
 bot.on("ready", () => {
   console.log("-----------------------------------------------------------");
   console.log(
-    `Logged in as ${bot.user.username}#${bot.user.discriminator} running version 1.0.0`
+    `Logged in as ${bot.user.username}#${bot.user.discriminator} running version 1.1.0`
   );
   bot.user.setActivity("f!help");
-  console.log(`${bot.user.username} is on ${bot.guilds.size} server(s)!`);
+  console.log(`${bot.user.username} is on ${bot.guilds.cache.size} server(s)!`);
   console.log("-----------------------------------------------------------");
   registerCommands();
 });
