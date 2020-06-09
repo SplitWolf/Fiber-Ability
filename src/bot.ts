@@ -52,13 +52,18 @@ bot.on("message", (message: Discord.Message) => {
   //Command Handler
   registry.getCommand(cmd, command => {
     if (command !== null) {
-      if(command.hasPermission(message)) {
+      if (command.hasPermission(message)) {
         command.run(bot, message, args, prefix);
       } else {
-        message.channel.send(`\`You do not have permission to use ${cmd}!\``);
+        message.channel.send(`\`You do not have permission to use ${cmd}!\``)
+        .then(msg => {
+              msg.delete({timeout: 1000})
+          });
       }
     } else {
-      message.channel.send(`\`${cmd} is not a command!\``);
+      message.channel.send(`\`${cmd} is not a command!\``).then(msg => {
+          msg.delete({timeout: 1000})
+      });
     }
   });
 });
