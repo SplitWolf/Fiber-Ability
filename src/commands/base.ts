@@ -34,13 +34,17 @@ export abstract class Command {
    * @param message Message to check permissions for.
    */
   hasPermission(message: Message): boolean {
-    const hasPerms = message.guild
-      .member(message.author)
-      .permissions.has(this.userPermissions);
-    if (hasPerms) {
+    if (this.userPermissions != null) {
+      const hasPerms = message.guild
+        .member(message.author)
+        .permissions.has(this.userPermissions);
+      if (hasPerms) {
+        return true;
+      }
+      return false;
+    } else {
       return true;
     }
-    return false;
   }
 
   getAliases(): string[] {
