@@ -34,20 +34,16 @@ bot.on("message", (message: Discord.Message) => {
   // Bot's Default Prefix
   const prefix: string = "f!";
 
-  // Message Content Split By Space
   const messageArray = message.content.split(" ");
 
-  //Get Arguments by removing the first element of the messageArray
   const args = messageArray.slice(1);
 
-  // Get first element of messageArray, should contain the command
   const msg = messageArray[0];
 
   //Get rid of prefix, whitespace and line terminators
   const cmd = msg.slice(prefix.length).trim();
 
-  //Check for prefix
-  if(!msg.startsWith(prefix)) return;
+  if (!msg.startsWith(prefix)) return;
 
   //Command Handler
   registry.getCommand(cmd, command => {
