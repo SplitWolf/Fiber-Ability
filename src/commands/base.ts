@@ -12,7 +12,7 @@ export abstract class Command {
 
   constructor(info: {
     name: string;
-    aliases?: string[];
+    aliases: string[];
     usage: string;
     description: string;
     group: string;
