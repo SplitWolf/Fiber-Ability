@@ -1,5 +1,4 @@
 import { Command } from "./base";
-import { Message } from "discord.js";
 
 module.exports = class clean extends Command {
   constructor() {
@@ -13,30 +12,22 @@ module.exports = class clean extends Command {
     });
   }
 
-  async run(
-    bot: import("discord.js").Client,
-    message: import("discord.js").Message,
-    args: string[],
-    prefix: string
-  ): Promise<void> {
-    message.delete();
+  async run(bot: import("discord.js").Client, message: import("discord.js").Message, args: string[], prefix: string): Promise<void> {
+    await message.delete();
     let amount: number = Number(args[0]);
     if (isNaN(amount) || amount <= 0) {
-      let msg = await message.channel.send("Invaild Arguments");
-      if (!Array.isArray(msg)) {
-        msg.delete(700);
-      }
+      message.channel.send("Invaild Arguments").then(msg => {
+        msg.delete({timeout: 700})
+      });
     } else {
-      let fetched = await message.channel.fetchMessages({ limit: amount });
-      message.channel
-        .bulkDelete(fetched)
-        .catch(error => message.channel.send(`Error: ${error}`));
-      let msg = await message.channel.send(
+      let fetched = await message.channel.messages.fetch({ limit: amount });
+      message.channel.bulkDelete(fetched)
+      .catch(error => message.channel.send(`Error: ${error}`));
+      message.channel.send(
         `Deleted \`${fetched.size}\` messages.`
-      );
-      if (!Array.isArray(msg)) {
-        msg.delete(700);
-      }
+      ).then(msg => {
+        msg.delete({timeout: 700})
+      });
     }
   }
 };
