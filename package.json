@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/SplitWolf/Fiber-Ability#readme",
   "dependencies": {
-    "discord.js": "12.2.0",
+    "discord.js": "12.3.1",
     "node-opus": "0.3.3",
     "ytdl-core": "3.2.2"
   },
@@ -32,7 +32,7 @@
     "@types/node": "14.0.14",
     "dotenv": "8.2.0",
     "ts-loader": "7.0.5",
-    "ts-node": "8.10.2",
+    "ts-node": "9.0.0",
     "typescript": "3.9.5"
   }
 }
