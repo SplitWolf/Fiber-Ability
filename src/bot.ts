@@ -10,12 +10,14 @@ function registerCommands() {
   registry.setCommand("ping", __dirname + "/commands/ping.ts");
   registry.setCommand("clean", __dirname + "/commands/clean.ts");
   registry.setCommand("kick", __dirname + "/commands/kick.ts");
+  registry.setCommand("play", __dirname + "/commands/music/play.ts");
+  registry.setCommand("skip", __dirname + "/commands/music/skip.ts");
 }
 
 bot.on("ready", () => {
   console.log("-----------------------------------------------------------");
   console.log(
-    `Logged in as ${bot.user.username}#${bot.user.discriminator} running version 1.1.0`
+    `Logged in as ${bot.user.username}#${bot.user.discriminator} running version 1.2.0`
   );
   bot.user.setActivity("f!help");
   console.log(`${bot.user.username} is on ${bot.guilds.cache.size} server(s)!`);
@@ -71,8 +73,8 @@ bot.on("error", (e: any) => {
 bot.on("warn", (e: any) => {
   console.warn(e);
 });
-bot.on("info", (e: any) => {
-  console.info(e);
+bot.on("debug", (e: any) => {
+  //console.info(e);
 });
 
 bot.login(process.env.BOT_TOKEN);
