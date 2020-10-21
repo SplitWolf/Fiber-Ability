@@ -10,6 +10,7 @@ function registerCommands() {
   registry.setCommand("ping", __dirname + "/commands/ping.ts");
   registry.setCommand("clean", __dirname + "/commands/clean.ts");
   registry.setCommand("kick", __dirname + "/commands/kick.ts");
+  registry.setCommand("hypixel", __dirname + "/commands/hypixel.ts");
   registry.setCommand("play", __dirname + "/commands/music/play.ts");
   registry.setCommand("skip", __dirname + "/commands/music/skip.ts");
 }
@@ -43,8 +44,8 @@ bot.on("message", (message: Discord.Message) => {
 
   const msg = messageArray[0];
 
-  //Get rid of prefix, whitespace and line terminators
-  const cmd = msg.slice(prefix.length).trim();
+  //Get rid of prefix, whitespace and line terminators & convert to lowercase
+  const cmd = msg.slice(prefix.length).trim().toLowerCase();
 
   if (!msg.startsWith(prefix)) return;
 
