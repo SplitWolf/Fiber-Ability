@@ -17,17 +17,19 @@ module.exports = class clean extends Command {
     let amount: number = Number(args[0]);
     if (isNaN(amount) || amount <= 0) {
       message.channel.send("Invaild Arguments").then(msg => {
-        msg.delete({timeout: 700})
+        msg.delete({timeout: 1200})
       });
     } else {
       let fetched = await message.channel.messages.fetch({ limit: amount });
-      message.channel.bulkDelete(fetched)
-      .catch(error => message.channel.send(`Error: ${error}`));
-      message.channel.send(
-        `Deleted \`${fetched.size}\` messages.`
-      ).then(msg => {
-        msg.delete({timeout: 700})
-      });
+      if(message.channel.type != "dm") {
+        message.channel.bulkDelete(fetched)
+        .catch(error => message.channel.send(`Error: ${error}`));
+        message.channel.send(
+          `Deleted \`${fetched.size}\` messages.`
+        ).then(msg => {
+          msg.delete({timeout: 1200})
+        });
+      }
     }
   }
 };
