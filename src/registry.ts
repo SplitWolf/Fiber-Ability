@@ -25,7 +25,7 @@ export class Registry {
         //Register Command
         const cmdImport = require(filePath.toString());
         const cmd = new cmdImport();
-        if (!this.commands.has(commandName) || !this.aliases.has(commandName)) {
+        if (!this.commands.has(commandName) && !this.aliases.has(commandName)) {
           this.commands.set(commandName, cmd);
         } else {
           console.error(
@@ -35,7 +35,7 @@ export class Registry {
         //Register aliases
         let aliases: string[] = cmd.getAliases();
         aliases.forEach(alias => {
-          if (!this.commands.has(alias) || !this.aliases.has(alias)) {
+          if (!this.commands.has(alias) && !this.aliases.has(alias)) {
             this.aliases.set(alias, commandName);
           } else {
             console.error(
