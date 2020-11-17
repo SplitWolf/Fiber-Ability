@@ -13,6 +13,7 @@ function registerCommands() {
   registry.setCommand("hypixel", __dirname + "/commands/hypixel.ts");
   registry.setCommand("play", __dirname + "/commands/music/play.ts");
   registry.setCommand("skip", __dirname + "/commands/music/skip.ts");
+  registry.setCommand("queue", __dirname + "/commands/music/queue.ts");
 }
 
 bot.on("ready", () => {
