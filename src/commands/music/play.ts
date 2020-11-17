@@ -108,6 +108,8 @@ module.exports = class play extends Command {
         })
         dispatcher.setVolumeLogarithmic(serverQueue.volume/ 5);
         serverQueue.dispatcher = dispatcher;
+        this.queues.set(guild.id, serverQueue);
+        Utils.queues = [...this.queues];
     }
 }
 
