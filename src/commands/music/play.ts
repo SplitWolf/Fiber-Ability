@@ -1,8 +1,9 @@
 
 import { Command } from "../base";
-import { Message, Client, Guild, DiscordAPIError, VoiceChannel, VoiceConnection, TextChannel, StreamDispatcher } from "discord.js";
+import { Message, Client, Guild, VoiceChannel, VoiceConnection, TextChannel, StreamDispatcher } from "discord.js";
 import { Utils } from '../../utils/utils';
 import * as ytdl from 'ytdl-core';
+import { search } from 'yt-search';
 
 module.exports = class play extends Command {
   constructor() {
@@ -11,7 +12,7 @@ module.exports = class play extends Command {
       description: "",
       usage: "",
       group: "music",
-      aliases: []
+      aliases: ["p"]
     });
 
     
@@ -46,11 +47,24 @@ module.exports = class play extends Command {
           );
           return;
         }
-        const songInfo = await ytdl.getInfo(args[0]);
+        let songInfo: ytdl.videoInfo = null;
+
+        if(args[0].match(/^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu\.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/) != null) {
+            songInfo = await ytdl.getInfo(args[0]);
+        } else {
+          try {
+            let data = await search(args.join(' '));
+            songInfo = await ytdl.getInfo(data.videos[0].url);
+          } catch(e) {
+            console.log("err: " + e)
+            message.channel.send('Sorry, something went wrong.');
+          }
+        }
 
         const song = {
           title: songInfo.videoDetails.title,
-          url: songInfo.videoDetails.video_url
+          url: songInfo.videoDetails.video_url,
+          lengthSeconds: parseInt(songInfo.videoDetails.lengthSeconds)
         }
 
         if(!serverQueue) {
@@ -77,7 +91,12 @@ module.exports = class play extends Command {
           }
         } else {
           serverQueue.songs.push(song);
-          message.channel.send(`**${song.title}** has been added to the queue!`)
+          if(serverQueue.playing == false) {
+            this.play(message.guild, song);
+            serverQueue.playing = true;
+            return;
+          }
+          message.channel.send(`**${song.title}** has been added to the queue!`);          
         }
 
         Utils.queues = [...this.queues];
@@ -91,16 +110,16 @@ module.exports = class play extends Command {
         //this.queues.delete(guild.id);
         serverQueue.playing = false;
         return;
+      } else {
+        serverQueue.nowPlaying = song.title;
+        serverQueue.textChannel.send(`Now playing: **${song.title}**`)
       }
+      
       const dispatcher = serverQueue.connection
         .play(ytdl(song.url, {highWaterMark: 1024 * 1024 * 10}))
         .on('finish', () => {
           serverQueue.songs.shift();
           const nextSong = serverQueue.songs[0];
-          if(serverQueue.songs[0] != undefined) {
-            serverQueue.textChannel.send(`Now playing: **${nextSong.title}**`);
-            serverQueue.nowPlaying = nextSong.title
-          }
           this.play(guild, nextSong);
         })
         .on('error', err => {
@@ -115,7 +134,8 @@ module.exports = class play extends Command {
 
 type Song = {
   url: string,
-  title: string
+  title: string,
+  lengthSeconds: number
 }
 
 export type QueueConsruct = {
