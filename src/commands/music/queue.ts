@@ -26,8 +26,13 @@ module.exports = class queue extends Command {
              message.channel.send(`I'm not playing anything.`);
              return;
         }
+        let resp = '';
         for(let i = 0; i < serverQueue.songs.length; i++) {
-            message.channel.send(`**${i + 1}.** ${serverQueue.songs[i].title}`)
+            let videoLengthMinutes = Math.floor((serverQueue.songs[i].lengthSeconds)/60)
+            let videoSecondsRemaing = (serverQueue.songs[i].lengthSeconds)-(videoLengthMinutes*60)
+            resp += `${i+1}) ${serverQueue.songs[i].title}    ${videoLengthMinutes}:${videoSecondsRemaing}\n`
         }        
+        resp = "```apache\n" + resp + "```" 
+        message.channel.send(resp);
     }
 }
