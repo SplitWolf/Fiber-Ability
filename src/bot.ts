@@ -14,6 +14,7 @@ function registerCommands() {
   registry.setCommand("play", __dirname + "/commands/music/play.ts");
   registry.setCommand("skip", __dirname + "/commands/music/skip.ts");
   registry.setCommand("queue", __dirname + "/commands/music/queue.ts");
+  registry.setCommand("search", __dirname + "/commands/music/search.ts")
 }
 
 bot.on("ready", () => {
